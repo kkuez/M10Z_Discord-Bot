@@ -44,11 +44,12 @@ public class BotProcessor {
 
     public void notifyLive(ChannelGoLiveEvent event) {
         String liveMessage = event.getChannel().getName() + " ist live!\nhttps://www.twitch.tv/" + event.getChannel().getName();
-        System.out.println(liveMessage);
 
         Set<String> discordPostChannelNames = Arrays.stream(properties.getProperty("discord_post_channel").split(",")).collect(Collectors.toSet());
         List<TextChannel> textChannels = bot.getTextChannels().stream().filter(chan -> discordPostChannelNames.contains(chan.getName())).collect(Collectors.toList());
 
+        // TODO proper logging
+        System.out.println(liveMessage);
         textChannels.forEach(chan -> chan.sendMessage(liveMessage).queue());
     }
 }
