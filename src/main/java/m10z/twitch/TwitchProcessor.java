@@ -3,6 +3,7 @@ package m10z.twitch;
 import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
 import com.github.twitch4j.TwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
+import com.github.twitch4j.events.ChannelGoLiveEvent;
 import m10z.bot.BotProcessor;
 
 import java.util.Properties;
@@ -21,6 +22,10 @@ public class TwitchProcessor {
                 .withDefaultAuthToken(oAuth2Credential)
                 .withEnableHelix(true)
                 .build();
+
+        twitchClient.getClientHelper().enableStreamEventListener(properties.getProperty("twitch_channel_to_follow"));
+        twitchClient.getEventManager().onEvent(ChannelGoLiveEvent.class, event -> botProcessor.notifyLive(event));
+        System.out.println();
     }
 
     public void setBotProcessor(BotProcessor botProcessor) {

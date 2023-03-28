@@ -1,3 +1,6 @@
 bot_token=
+# Channels names to post to, if twitch channel has gone live
+discord_post_channel=
 twitch_id=
 twitch_token=
+twitch_channel_to_follow=
