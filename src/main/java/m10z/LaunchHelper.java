@@ -2,6 +2,7 @@ package m10z;
 
 import m10z.bot.BotProcessor;
 import m10z.twitch.TwitchProcessor;
+import m10z.youtube.YoutubeProcessor;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -21,9 +22,12 @@ public class LaunchHelper {
 
         BotProcessor botProcessor = new BotProcessor(properties);
         TwitchProcessor twitchProcessor = new TwitchProcessor(properties);
+        YoutubeProcessor youtubeProcessor = new YoutubeProcessor(properties);
 
         botProcessor.setTwitchProcessor(twitchProcessor);
+        botProcessor.setYoutubeProcessor(youtubeProcessor);
         twitchProcessor.setBotProcessor(botProcessor);
+        youtubeProcessor.setBotProcessor(botProcessor);
     }
 
 

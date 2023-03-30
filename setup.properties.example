@@ -4,3 +4,5 @@ discord_post_channel=
 twitch_id=
 twitch_token=
 twitch_channel_to_follow=
+# youtube channel id to request sequently if online
+youtube_channel_id=

@@ -24,7 +24,7 @@ public class TwitchProcessor {
                 .build();
 
         twitchClient.getClientHelper().enableStreamEventListener(properties.getProperty("twitch_channel_to_follow"));
-        twitchClient.getEventManager().onEvent(ChannelGoLiveEvent.class, event -> botProcessor.notifyLive(event));
+        twitchClient.getEventManager().onEvent(ChannelGoLiveEvent.class, event -> botProcessor.notifyTwitchLive(event));
         System.out.println();
     }
 
