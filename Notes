@@ -1,0 +1,2 @@
+To build jar:
+Mvn clean install

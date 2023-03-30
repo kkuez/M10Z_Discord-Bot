@@ -33,7 +33,7 @@ public class YoutubeProcessor {
             Request.Builder builder = new Request.Builder();
             String youtubeChannelUrl = "https://www.youtube.com/channel/" + properties.getProperty("youtube_channel_id") + "/live";
 
-            while(properties.keySet().contains("youtube_channel_id")) {
+            while(properties.keySet().contains("youtube_channel_id") && properties.getProperty("youtube_channel_id") != null) {
                 //builder.url("https://www.youtube.com/channel/UCWiUTY3qnjIyjeDjCZwaMGQ/live");
                 builder.url(youtubeChannelUrl);
                 Request request = builder.build();
