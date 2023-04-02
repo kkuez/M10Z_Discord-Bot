@@ -1,6 +1,8 @@
 package m10z.bot;
 
+import com.github.twitch4j.common.events.TwitchEvent;
 import com.github.twitch4j.events.ChannelGoLiveEvent;
+import com.github.twitch4j.events.ChannelGoOfflineEvent;
 import m10z.twitch.TwitchProcessor;
 import m10z.youtube.YoutubeProcessor;
 import net.dv8tion.jda.api.JDA;
@@ -44,15 +46,33 @@ public class BotProcessor {
         this.twitchProcessor = twitchProcessor;
     }
 
-    public void notifyTwitchLive(ChannelGoLiveEvent event) {
-        String twitchChannelName = event.getChannel().getName();
-        String liveMessage = "**" + twitchChannelName + "** *ist live!*\nhttps://www.twitch.tv/" + twitchChannelName;
+    public void notifyTwitchLive(TwitchEvent event) {
+        String eventClassString = event.getClass().toString();
+
+        if(!event.getClass().equals(ChannelGoLiveEvent.class) && !event.getClass().equals(ChannelGoOfflineEvent.class)) {
+            //TODO Logging
+            throw new RuntimeException("Could not find event class implementation");
+        }
+
+        String twitchChannelName;
+        String liveMessage = "No event class found.";
+        switch (eventClassString) {
+            case "class com.github.twitch4j.events.ChannelGoLiveEvent":
+                twitchChannelName = ((ChannelGoLiveEvent)event).getChannel().getName();
+                liveMessage = ":movie_camera: :movie_camera: :movie_camera: **" + twitchChannelName + "** *ist live!* :movie_camera: :movie_camera: :movie_camera: \n\nhttps://www.twitch.tv/" + twitchChannelName;
+                break;
+            case "class com.github.twitch4j.events.ChannelGoOfflineEvent":
+                twitchChannelName = ((ChannelGoOfflineEvent)event).getChannel().getName();
+                liveMessage = "**" + twitchChannelName + "** *ist nicht mehr live.*\nhttps://w7.pngwing.com/pngs/305/345/png-transparent-sad-emoticon-twitch-emote-video-game-amazon-com-gameplay-emotes-smiley-online-chat-smile-thumbnail.png";
+                break;
+        }
 
         List<TextChannel> textChannels = getLiveDiscordChannels();
 
         // TODO proper logging
         System.out.println(liveMessage);
-        textChannels.forEach(chan -> chan.sendMessage(liveMessage).queue());
+        final String finalLiveMessage4Lambda = liveMessage;
+        textChannels.forEach(chan -> chan.sendMessage(finalLiveMessage4Lambda).queue());
     }
 
     @NotNull

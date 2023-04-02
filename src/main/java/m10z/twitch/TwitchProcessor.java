@@ -4,6 +4,7 @@ import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
 import com.github.twitch4j.TwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
 import com.github.twitch4j.events.ChannelGoLiveEvent;
+import com.github.twitch4j.events.ChannelGoOfflineEvent;
 import m10z.bot.BotProcessor;
 
 import java.util.Properties;
@@ -25,6 +26,7 @@ public class TwitchProcessor {
 
         twitchClient.getClientHelper().enableStreamEventListener(properties.getProperty("twitch_channel_to_follow"));
         twitchClient.getEventManager().onEvent(ChannelGoLiveEvent.class, event -> botProcessor.notifyTwitchLive(event));
+        twitchClient.getEventManager().onEvent(ChannelGoOfflineEvent.class, event -> botProcessor.notifyTwitchLive(event));
         System.out.println();
     }
 
