@@ -59,11 +59,11 @@ public class BotProcessor {
         switch (eventClassString) {
             case "class com.github.twitch4j.events.ChannelGoLiveEvent":
                 twitchChannelName = ((ChannelGoLiveEvent)event).getChannel().getName();
-                liveMessage = ":movie_camera: :movie_camera: :movie_camera: **" + twitchChannelName + "** *ist live!* :movie_camera: :movie_camera: :movie_camera: \n\nhttps://www.twitch.tv/" + twitchChannelName;
+                liveMessage = ":movie_camera: :movie_camera: :movie_camera: **" + twitchChannelName + "** *ist live!* :movie_camera: :movie_camera: :movie_camera: \nhttps://www.twitch.tv/" + twitchChannelName;
                 break;
             case "class com.github.twitch4j.events.ChannelGoOfflineEvent":
                 twitchChannelName = ((ChannelGoOfflineEvent)event).getChannel().getName();
-                liveMessage = "**" + twitchChannelName + "** *ist nicht mehr live.*\nhttps://w7.pngwing.com/pngs/305/345/png-transparent-sad-emoticon-twitch-emote-video-game-amazon-com-gameplay-emotes-smiley-online-chat-smile-thumbnail.png";
+                liveMessage = ":octagonal_sign: :octagonal_sign: :octagonal_sign: **" + twitchChannelName + "** *ist nicht mehr live.*:octagonal_sign: :octagonal_sign: :octagonal_sign: ";
                 break;
         }
 
