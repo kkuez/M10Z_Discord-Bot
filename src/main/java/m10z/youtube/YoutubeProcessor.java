@@ -39,8 +39,7 @@ public class YoutubeProcessor {
                 Request request = builder.build();
 
                 Call call = okHttpClient.newCall(request);
-                try {
-                    Response response = call.execute();
+                try(Response response = call.execute()) {
                     String bodyAsString = new String(response.body().bytes());
 
                     if (bodyAsString.contains("isLive") && !cacheIfOnlineFile.exists()) {
