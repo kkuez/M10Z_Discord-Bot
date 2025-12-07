@@ -31,7 +31,7 @@ public class BotProcessor {
 
     private JDA prepareDiscordBot() {
         JDABuilder builder = JDABuilder.createDefault(properties.getProperty("bot_token"));
-        builder.setActivity(Activity.watching("community.wasted.de"));
+        builder.setActivity(Activity.watching(properties.getProperty("guckt")));
         JDA buildBot = builder.build();
         try {
             buildBot.awaitReady();
