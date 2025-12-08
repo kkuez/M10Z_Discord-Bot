@@ -59,7 +59,7 @@ public class BotProcessor {
         switch (eventClassString) {
             case "class com.github.twitch4j.events.ChannelGoLiveEvent":
                 twitchChannelName = ((ChannelGoLiveEvent)event).getChannel().getName();
-                liveMessage = ":movie_camera: :movie_camera: :movie_camera: **" + twitchChannelName + "** *ist live!* :movie_camera: :movie_camera: :movie_camera: \nhttps://www.twitch.tv/" + twitchChannelName;
+                liveMessage = ":green_circle: :green_circle: :green_circle:  **" + twitchChannelName + "** *ist live!* :green_circle: :green_circle: :green_circle: \nhttps://www.twitch.tv/" + twitchChannelName;
                 break;
             case "class com.github.twitch4j.events.ChannelGoOfflineEvent":
                 twitchChannelName = ((ChannelGoOfflineEvent)event).getChannel().getName();
